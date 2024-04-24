@@ -30,7 +30,7 @@ class RegisterController extends AbstractController
 
             $this->addFlash('success', 'Votre compte a bien été créé');
 
-            return $this->redirectToRoute('app_account');
+            return $this->redirectToRoute('app_login');
         }
 
 
