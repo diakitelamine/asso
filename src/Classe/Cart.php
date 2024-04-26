@@ -25,8 +25,8 @@ class Cart
         // Récupérer le panier de la session s'il existe, sinon initialiser un tableau vide
         $cart = $this->getCart();
 
-        // Vérifier si le produit est déjà dans le panier
-        if (array_key_exists($product->getId(), $cart)) {
+           // Vérifier si le produit est déjà dans le panier
+        if (isset($cart[$product->getId()])) {
             // Si le produit est déjà dans le panier, augmenter la quantité
             $cart[$product->getId()]['qty']++;
         } else {
@@ -45,11 +45,11 @@ class Cart
      * Fonction pour récupérer le panier
      */
 
-    public function getCart(): array
-    {
-        return $this->requestStack->getSession()->get('cart', []);
-    }
-
+     public function getCart()
+     {
+         return $this->requestStack->getSession()->get('cart');
+     }
+     
     /**
      *  Fonction pour récupérer la quantité totale des produits dans le panier
      */

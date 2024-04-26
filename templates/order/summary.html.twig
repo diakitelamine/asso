@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container my-5">
+        <h1>Récapitulatif de ma commande</h1>
+        <div class="row">
+            <div class="col-md-8">
+               <div class="bg-light p-3">
+                    <strong>Contenu de mon panier</strong><br>
+                    {% for product in cart %}
+                                    <div class="row mt-2">
+                                            <div class="col-md-2">
+                                                <img src="/uploads/{{product.object.illustration}}" alt="{{product.object.name}}" class="img-fluid">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <strong>{{product.object.name}}</strong>
+                                                <span class="d-block small">Prix unitaire: {{product.object.pricewt|price}}</span>
+                                            </div>
+                                            
+                                            <div class="col-md-2 text-right">
+                                    
+                                                <span class="badge text-bg-secondary">x{{product.qty}}</span>
+                                                
+                                            </div>
+                                            <div class="col-md-2 text-right">
+                                                <strong>{{(product.qty * product.object.pricewt)|price}}</strong>
+                                            </div>
+                                    </div>
+
+                    {% endfor %}  
+            </div>
+             <div class="bg-light p-3 my-3">            
+                <strong>Votre adresse de livraison</strong> <br>
+                {{choices.adresses.firstname}} {{choices.adresses.lastname}} <br>
+                {{choices.adresses.adresse}} <br>
+                {{choices.adresses.postal}} {{choices.adresses.city}} <br>
+                {{choices.adresses.country}} <br>
+            </div>
+
+             
+           
+             <div class="bg-light p-3">
+                <strong>Votre transporteur</strong> <br>
+
+                {{choices.carriers.name}} <br>
+                {{choices.carriers.description|raw}} <br>
+             </div>
+             
+                      
+            </div>
+            <div class="col-md-4">
+                <div class="bg-light p-2 d-flex align-items-center justify-content-between">
+                    <span class="fw-bold mt-3">Total produit</span>
+                    <span>{{fullQuantity}}</span>
+                    
+                </div>
+               <div class="bg-light p-2 d-flex align-items-center justify-content-between">
+                    <span class="fw-bold mt-3">Total transporteur</span>
+                    <span>{{choices.carriers.price|price}}</span>
+                   
+                </div>
+                <div class="bg-light p-2 d-flex align-items-center justify-content-between">
+                    <span class="fw-bold mt-3">Total commande</span>
+                    <span>{{(totalwt + choices.carriers.price )|price}}</span>
+                   
+                </div>
+                <a href="" class="btn btn-success w-100 mt-3">Payer</a>
+ 
+            </div>    
+    </div>
+  
+{% endblock %}
