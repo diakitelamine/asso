@@ -4,15 +4,15 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -37,8 +37,8 @@ class ProductCrudController extends AbstractCrudController
         }
 
         return [
-            IdField::new('id')->hideOnForm(),
             TextField::new('name')->setLabel('Titre')->setHelp('Titre du produit'),
+            BooleanField::new('isHomePage')->setLabel('Produit à la une ?')->setHelp('Afficher le produit sur la page d\'accueil'),
             SlugField::new('slug')->setTargetFieldName('name')->setHelp('URL du produit'),
             TextEditorField::new('description')->setLabel('Description')->setHelp('Description du produit'),
             ImageField::new('illustration')->setLabel('Image')->setHelp('Image du produit')->setUploadDir('/public/uploads')

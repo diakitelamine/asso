@@ -5,7 +5,6 @@
 <h3>Commande n° : {{order.id}}</h3>
  {{ include('admin/state.html.twig', {field: {value: order.state}}) }} 
  <br/>
- <br/>
 <span class="badge badge-secondary">Commande passer le :{{order.createdAt|date('d/m/y')}}</span>
 
 <div class="row my-4">

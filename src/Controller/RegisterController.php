@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,6 +30,14 @@ class RegisterController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Votre compte a bien été créé');
+            
+            // Envoi d'un email de bienvenue
+            $mail = new Mail();
+            $vars= [
+                'firstname' => $user->getFirstname()
+            ];
+            $mail->send($user->getEmail(), $user->getFirstname().' '.$user->getLastname(), 'Bienvenue sur la boutique ASSO', 'welcome.html', $vars);
+    
 
             return $this->redirectToRoute('app_login');
         }
